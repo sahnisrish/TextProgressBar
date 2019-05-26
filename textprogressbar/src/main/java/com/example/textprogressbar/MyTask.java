@@ -35,8 +35,8 @@ public class MyTask {
                         Log.e("COLORS", cFrom + " " + cTo);
                         sleep(500);
                         Log.e("500",  "Sleep Over");
-                        textProgressBar.modify(finalColorText[cFrom],finalColorText[cTo]);
-                        Log.e("Post Animation",  cFrom + " " + cTo);
+                        Boolean val = textProgressBar.modify(finalColorText[cFrom],finalColorText[cTo]);
+                        Log.e("Post Animation",  val + "");
                         if(isCancelled()){
                             textProgressBar.modify(finalColorText[cTo],finalColorText[0]);
                             break;
