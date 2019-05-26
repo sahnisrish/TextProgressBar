@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.util.Log;
 
 public class MyTask {
-    private Context context;
     private TextProgressBar textProgressBar;
     private Boolean cancel = false;
     private Thread thread;
@@ -17,7 +16,6 @@ public class MyTask {
     private int speed;
     private int[] colorText;
     private MyTask(Context context, TextProgressBar textProgressBar){
-        this.context = context;
         this.textProgressBar = textProgressBar;
         this.theme = textProgressBar.getTheme();
         this.speed = 6 - textProgressBar.getSpeed();

@@ -77,11 +77,13 @@ public class TextProgressBar extends AppCompatTextView {
 
     public void setProgress(Boolean progress){
         this.progress = progress;
-        myTask.cancel(true);
-        myTask = MyTask.close(myTask);
         if(progress) {
             myTask = MyTask.open(context,this);
             myTask.execute();
+        }
+        else {
+            myTask.cancel(true);
+            myTask = MyTask.close(myTask);
         }
     }
 
