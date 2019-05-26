@@ -5,7 +5,7 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.os.AsyncTask;
 
-public class MyTask extends AsyncTask<String, Void, Void> {
+public class MyTask extends AsyncTask<String, Void, String> {
     private Context context;
     private TextProgressBar textProgressBar;
     public MyTask(Context context, TextProgressBar textProgressBar){
@@ -13,8 +13,13 @@ public class MyTask extends AsyncTask<String, Void, Void> {
         this.textProgressBar = textProgressBar;
     }
     @Override
-    protected Void doInBackground(String... strings) {
+    protected String doInBackground(String... strings) {
         String theme = strings[0];
+        return theme;
+    }
+
+    @Override
+    protected void onPostExecute(String theme) {
         int colorText[] = new int[8];
         int position = 0;
         if(theme.equalsIgnoreCase("light")){
@@ -53,6 +58,6 @@ public class MyTask extends AsyncTask<String, Void, Void> {
             }
             position = cTo;
         }
-        return null;
+        super.onPostExecute(theme);
     }
 }
