@@ -65,7 +65,7 @@ public class TextProgressBar extends AppCompatTextView {
             myTask.cancel(true);
     }
 
-    public boolean inProgress(){
+    public Boolean inProgress(){
         return progress;
     }
 }
