@@ -1,5 +1,7 @@
 package com.example.textprogressbar;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -75,5 +77,16 @@ public class TextProgressBar extends AppCompatTextView {
 
     public Boolean inProgress(){
         return progress;
+    }
+
+    public void modify(int colorFrom, int colorTo) {
+        ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animator) {
+                setTextColor((Integer)animator.getAnimatedValue());
+            }
+        });
+        colorAnimation.start();
     }
 }

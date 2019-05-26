@@ -4,60 +4,55 @@ import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Handler;
 
-public class MyTask extends AsyncTask<String, Void, String> {
+public class MyTask {
     private Context context;
     private TextProgressBar textProgressBar;
+    private Boolean cancel;
     public MyTask(Context context, TextProgressBar textProgressBar){
         this.context = context;
         this.textProgressBar = textProgressBar;
     }
-    @Override
-    protected String doInBackground(String... strings) {
-        String theme = strings[0];
-        return theme;
-    }
-
-    @Override
-    protected void onPostExecute(String theme) {
+    public void execute(final String theme) {
         int colorText[] = new int[8];
-        int position = 0;
         if(theme.equalsIgnoreCase("light")){
             colorText = context.getResources().getIntArray(R.array.light);
         }
         else if(theme.equalsIgnoreCase("dark")){
             colorText = context.getResources().getIntArray(R.array.dark);
         }
-        while (true){
-            int cFrom = position;
-            int cTo = (position+1)%colorText.length;
-            ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorText[cFrom], colorText[cTo]);
-            colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator animator) {
-                    textProgressBar.setTextColor((Integer)animator.getAnimatedValue());
-                }
-            });
-            try {
-                synchronized (this) {
-                    wait(500);
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            colorAnimation.start();
-            if(isCancelled()){
-                ValueAnimator colorReset = ValueAnimator.ofObject(new ArgbEvaluator(), colorText[cTo], colorText[0]);
-                colorReset.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                    @Override
-                    public void onAnimationUpdate(ValueAnimator animator) {
-                        textProgressBar.setTextColor((Integer)animator.getAnimatedValue());
+        final int[] finalColorText = colorText;
+        Thread thread = new Thread(){
+            @Override
+            public void run() {
+                try {
+                    int position = 0;
+                    while (true){
+                        int cFrom = position;
+                        int cTo = (position+1)% finalColorText.length;
+                        sleep(500);
+                        textProgressBar.modify(finalColorText[cFrom],finalColorText[cTo]);
+                        if(isCancelled()){
+                            textProgressBar.modify(finalColorText[cTo],finalColorText[0]);
+                            break;
+                        }
+                        position = cTo;
                     }
-                });
-                break;
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-            position = cTo;
-        }
-        super.onPostExecute(theme);
+        };
+        thread.start();
+    }
+
+    private Boolean isCancelled(){
+        return cancel;
+    }
+
+    public void cancel(Boolean cancel){
+        this.cancel = cancel;
     }
 }
