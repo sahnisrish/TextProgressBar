@@ -12,6 +12,7 @@ public class MyTask {
     private Context context;
     private TextProgressBar textProgressBar;
     private Boolean cancel = false;
+    private Thread thread;
     public MyTask(Context context, TextProgressBar textProgressBar){
         this.context = context;
         this.textProgressBar = textProgressBar;
@@ -25,7 +26,7 @@ public class MyTask {
             colorText = context.getResources().getIntArray(R.array.dark);
         }
         final int[] finalColorText = colorText;
-        Thread thread = new Thread(){
+        thread = new Thread(){
             @Override
             public void run() {
                 try {
@@ -48,7 +49,6 @@ public class MyTask {
                     modify(finalColorText[position],finalColorText[0],0.5f);
                     sleep(100);
                     modify(finalColorText[position],finalColorText[0],1.0f);
-                    this.stop();
                 }
                 catch (Exception e) {
                     e.printStackTrace();
@@ -76,5 +76,6 @@ public class MyTask {
 
     public void cancel(Boolean cancel){
         this.cancel = cancel;
+        thread.stop();
     }
 }

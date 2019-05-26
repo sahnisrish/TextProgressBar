@@ -70,10 +70,11 @@ public class TextProgressBar extends AppCompatTextView {
 
     public void setProgress(Boolean progress){
         this.progress = progress;
-        if(progress)
+        myTask.cancel(true);
+        if(progress) {
+            myTask = new MyTask(context,this);
             myTask.execute(theme);
-        else
-            myTask.cancel(true);
+        }
     }
 
     public Boolean inProgress(){
