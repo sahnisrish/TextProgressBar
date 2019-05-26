@@ -33,8 +33,6 @@ public class MyTask {
 
     public static MyTask close(MyTask myTask) {
         myTask.thread.interrupt();
-        if(myTask.thread.isInterrupted())
-            myTask.thread = null;
         return null;
     }
 
@@ -55,7 +53,6 @@ public class MyTask {
                         position = cTo;
                     }
                     modify(colorText[position],colorText[0],0.5f);
-                    sleep(100);
                     modify(colorText[position],colorText[0],1.0f);
                 }
                 catch (Exception e) {
