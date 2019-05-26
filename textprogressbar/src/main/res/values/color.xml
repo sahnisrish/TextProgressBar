@@ -9,12 +9,12 @@
     <color name="light_pink">#EB276A</color>
     <color name="light_base">#FFFFFF</color>
 
-    <color name="dark_purple">#1A002E</color>
-    <color name="dark_blue">#000D63</color>
-    <color name="dark_green">#076D01</color>
-    <color name="dark_yellow">#6F5600</color>
-    <color name="dark_orange">#753B07</color>
-    <color name="dark_red">#690202</color>
-    <color name="dark_pink">#57041F</color>
+    <color name="dark_purple">#3E0F63</color>
+    <color name="dark_blue">#1E2C8B</color>
+    <color name="dark_green">#2E8529</color>
+    <color name="dark_yellow">#FFD400</color>
+    <color name="dark_orange">#FF3D02</color>
+    <color name="dark_red">#FF0000</color>
+    <color name="dark_pink">#FF003B</color>
     <color name="dark_base">#000000</color>
 </resources>

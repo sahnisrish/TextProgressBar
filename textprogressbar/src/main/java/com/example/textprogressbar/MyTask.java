@@ -13,19 +13,30 @@ public class MyTask {
     private TextProgressBar textProgressBar;
     private Boolean cancel = false;
     private Thread thread;
-    public MyTask(Context context, TextProgressBar textProgressBar){
+    private String theme;
+    private int[] colorText;
+    private MyTask(Context context, TextProgressBar textProgressBar){
         this.context = context;
         this.textProgressBar = textProgressBar;
-    }
-    public void execute(final String theme) {
-        int colorText[] = new int[8];
+        this.theme = textProgressBar.getTheme();
         if(theme.equalsIgnoreCase("light")){
             colorText = context.getResources().getIntArray(R.array.light);
         }
-        else if(theme.equalsIgnoreCase("dark")){
+        else {
             colorText = context.getResources().getIntArray(R.array.dark);
         }
-        final int[] finalColorText = colorText;
+    }
+
+    public static MyTask open(Context context, TextProgressBar textProgressBar) {
+        return new MyTask(context, textProgressBar);
+    }
+
+    public static MyTask close(MyTask myTask) {
+        myTask.thread.stop();
+        return null;
+    }
+
+    public void execute() {
         thread = new Thread(){
             @Override
             public void run() {
@@ -33,22 +44,22 @@ public class MyTask {
                     int position = 0;
                     while (!isCancelled()){
                         int cFrom = position;
-                        int cTo = (position+1)% finalColorText.length;
+                        int cTo = (position+1)% colorText.length;
 //                        Log.e("COLORS", cFrom + " " + cTo);
                         sleep(125);
-                        modify(finalColorText[cFrom],finalColorText[cTo],0.25f);
+                        modify(colorText[cFrom],colorText[cTo],0.25f);
                         sleep(125);
-                        modify(finalColorText[cFrom],finalColorText[cTo],0.50f);
+                        modify(colorText[cFrom],colorText[cTo],0.50f);
                         sleep(125);
-                        modify(finalColorText[cFrom],finalColorText[cTo],0.75f);
+                        modify(colorText[cFrom],colorText[cTo],0.75f);
                         sleep(125);
-                        modify(finalColorText[cFrom],finalColorText[cTo],1.0f);
+                        modify(colorText[cFrom],colorText[cTo],1.0f);
                         sleep(125);
                         position = cTo;
                     }
-                    modify(finalColorText[position],finalColorText[0],0.5f);
+                    modify(colorText[position],colorText[0],0.5f);
                     sleep(100);
-                    modify(finalColorText[position],finalColorText[0],1.0f);
+                    modify(colorText[position],colorText[0],1.0f);
                 }
                 catch (Exception e) {
                     e.printStackTrace();
@@ -76,6 +87,5 @@ public class MyTask {
 
     public void cancel(Boolean cancel){
         this.cancel = cancel;
-        thread.stop();
     }
 }

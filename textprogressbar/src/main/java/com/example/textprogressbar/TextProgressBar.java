@@ -35,7 +35,7 @@ public class TextProgressBar extends AppCompatTextView {
 
     @SuppressLint("ResourceAsColor")
     private void init(AttributeSet attrs) {
-        myTask = new MyTask(context,this);
+        myTask = null;
         if(attrs!=null) {
             TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.TextProgressBar);
             theme = a.getString(R.styleable.TextProgressBar_ptheme);
@@ -54,7 +54,8 @@ public class TextProgressBar extends AppCompatTextView {
             progress = false;
         }
         if(progress){
-            myTask.execute(theme);
+            myTask = MyTask.open(context,this);
+            myTask.execute();
         }
         if(theme.equalsIgnoreCase("light")){
             this.setTextColor(R.color.light_base);
@@ -71,9 +72,10 @@ public class TextProgressBar extends AppCompatTextView {
     public void setProgress(Boolean progress){
         this.progress = progress;
         myTask.cancel(true);
+        myTask = MyTask.close(myTask);
         if(progress) {
-            myTask = new MyTask(context,this);
-            myTask.execute(theme);
+            myTask = MyTask.open(context,this);
+            myTask.execute();
         }
     }
 
@@ -81,4 +83,7 @@ public class TextProgressBar extends AppCompatTextView {
         return progress;
     }
 
+    public String getTheme() {
+        return theme;
+    }
 }
