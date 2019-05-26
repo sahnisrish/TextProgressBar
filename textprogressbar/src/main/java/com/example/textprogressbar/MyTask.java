@@ -33,6 +33,8 @@ public class MyTask {
 
     public static MyTask close(MyTask myTask) {
         myTask.thread.interrupt();
+        if(myTask.thread.isInterrupted())
+            myTask.thread = null;
         return null;
     }
 
