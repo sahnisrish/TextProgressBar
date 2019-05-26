@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
+import android.util.Log;
 
 public class TextProgressBar extends AppCompatTextView {
 
@@ -80,6 +81,7 @@ public class TextProgressBar extends AppCompatTextView {
     }
 
     public void modify(int colorFrom, int colorTo) {
+        Log.e("Modify",  "Animating");
         ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
         colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override

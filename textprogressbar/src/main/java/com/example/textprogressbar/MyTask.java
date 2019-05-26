@@ -5,6 +5,7 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.util.Log;
 
 public class MyTask {
     private Context context;
@@ -31,8 +32,11 @@ public class MyTask {
                     while (true){
                         int cFrom = position;
                         int cTo = (position+1)% finalColorText.length;
+                        Log.e("COLORS", cFrom + " " + cTo);
                         sleep(500);
+                        Log.e("500",  "Sleep Over");
                         textProgressBar.modify(finalColorText[cFrom],finalColorText[cTo]);
+                        Log.e("Post Animation",  cFrom + " " + cTo);
                         if(isCancelled()){
                             textProgressBar.modify(finalColorText[cTo],finalColorText[0]);
                             break;
