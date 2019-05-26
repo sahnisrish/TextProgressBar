@@ -33,7 +33,7 @@ public class TextProgressBar extends AppCompatTextView {
         myTask = new MyTask(context,this);
         if(attrs!=null) {
             TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.TextProgressBar);
-            theme = a.getString(R.styleable.TextProgressBar_theme);
+            theme = a.getString(R.styleable.TextProgressBar_ptheme);
             progress = a.getBoolean(R.styleable.TextProgressBar_progress, false);
             try {
                 if (theme == null) {

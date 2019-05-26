@@ -5,8 +5,6 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import static java.lang.Thread.sleep;
-
 public class MyTask extends AsyncTask<String, Void, Void> {
     private Context context;
     private TextProgressBar textProgressBar;
