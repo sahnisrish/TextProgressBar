@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="light">
+        <item>@color/light_base</item>
+        <item>@color/light_purple</item>
+        <item>@color/light_blue</item>
+        <item>@color/light_green</item>
+        <item>@color/light_yellow</item>
+        <item>@color/light_orange</item>
+        <item>@color/light_red</item>
+        <item>@color/light_pink</item>
+    </array>
+
+    <array name="dark">
+        <item>@color/dark_base</item>
+        <item>@color/dark_purple</item>
+        <item>@color/dark_blue</item>
+        <item>@color/dark_green</item>
+        <item>@color/dark_yellow</item>
+        <item>@color/dark_orange</item>
+        <item>@color/dark_red</item>
+        <item>@color/dark_pink</item>
+    </array>
+</resources>
