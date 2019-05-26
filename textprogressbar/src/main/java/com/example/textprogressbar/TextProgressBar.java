@@ -1,5 +1,6 @@
 package com.example.textprogressbar;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v7.widget.AppCompatTextView;
@@ -29,6 +30,7 @@ public class TextProgressBar extends AppCompatTextView {
         init(attrs);
     }
 
+    @SuppressLint("ResourceAsColor")
     private void init(AttributeSet attrs) {
         myTask = new MyTask(context,this);
         if(attrs!=null) {
@@ -36,7 +38,7 @@ public class TextProgressBar extends AppCompatTextView {
             theme = a.getString(R.styleable.TextProgressBar_ptheme);
             progress = a.getBoolean(R.styleable.TextProgressBar_progress, false);
             try {
-                if (theme == null) {
+                if (theme == null || !(theme.equalsIgnoreCase("light")||theme.equalsIgnoreCase("dark"))) {
                     theme = "light";
                 }
             } catch (Exception e) {
@@ -50,6 +52,12 @@ public class TextProgressBar extends AppCompatTextView {
         }
         if(progress){
             myTask.execute(theme);
+        }
+        if(theme.equalsIgnoreCase("light")){
+            this.setTextColor(R.color.light_base);
+        }
+        else {
+            this.setTextColor(R.color.dark_base);
         }
     }
 
