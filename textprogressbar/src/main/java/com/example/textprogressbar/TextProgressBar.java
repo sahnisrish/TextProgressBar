@@ -80,16 +80,4 @@ public class TextProgressBar extends AppCompatTextView {
         return progress;
     }
 
-    public boolean modify(int colorFrom, int colorTo) {
-        Log.e("Modify",  "Animating");
-        ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
-        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animator) {
-                setTextColor((Integer)animator.getAnimatedValue());
-            }
-        });
-        colorAnimation.start();
-        return true;
-    }
 }
