@@ -45,6 +45,8 @@ public class MyTask {
                         sleep(125);
                         position = cTo;
                     }
+                    modify(finalColorText[position],finalColorText[0],0.5f);
+                    sleep(100);
                     modify(finalColorText[position],finalColorText[0],1.0f);
                     this.stop();
                 }
