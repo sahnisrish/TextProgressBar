@@ -34,7 +34,9 @@ public class MyTask extends AsyncTask<String, Void, Void> {
                 }
             });
             try {
-                wait(500);
+                synchronized (this) {
+                    wait(500);
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
