@@ -10,7 +10,7 @@ import android.util.Log;
 public class MyTask {
     private Context context;
     private TextProgressBar textProgressBar;
-    private Boolean cancel;
+    private Boolean cancel = false;
     public MyTask(Context context, TextProgressBar textProgressBar){
         this.context = context;
         this.textProgressBar = textProgressBar;
@@ -38,8 +38,9 @@ public class MyTask {
                         Boolean val = textProgressBar.modify(finalColorText[cFrom],finalColorText[cTo]);
                         Log.e("Post Animation",  val + "");
                         if(isCancelled()){
-                            textProgressBar.modify(finalColorText[cTo],finalColorText[0]);
-                            break;
+                            val = textProgressBar.modify(finalColorText[cTo],finalColorText[0]);
+                            if (val)
+                                break;
                         }
                         position = cTo;
                     }
