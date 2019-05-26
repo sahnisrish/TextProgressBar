@@ -46,6 +46,7 @@ public class MyTask {
                         position = cTo;
                     }
                     modify(finalColorText[position],finalColorText[0],1.0f);
+                    this.stop();
                 }
                 catch (Exception e) {
                     e.printStackTrace();
