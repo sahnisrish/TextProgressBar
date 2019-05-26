@@ -30,10 +30,10 @@ public class MyTask {
             public void run() {
                 try {
                     int position = 0;
-                    while (true){
+                    while (!isCancelled()){
                         int cFrom = position;
                         int cTo = (position+1)% finalColorText.length;
-                        Log.e("COLORS", cFrom + " " + cTo);
+//                        Log.e("COLORS", cFrom + " " + cTo);
                         sleep(125);
                         modify(finalColorText[cFrom],finalColorText[cTo],0.25f);
                         sleep(125);
@@ -42,12 +42,10 @@ public class MyTask {
                         modify(finalColorText[cFrom],finalColorText[cTo],0.75f);
                         sleep(125);
                         modify(finalColorText[cFrom],finalColorText[cTo],1.0f);
-                        if(isCancelled()){
-                            modify(finalColorText[cTo],finalColorText[0],1.0f);
-                            break;
-                        }
+                        sleep(125);
                         position = cTo;
                     }
+                    modify(finalColorText[position],finalColorText[0],1.0f);
                 }
                 catch (Exception e) {
                     e.printStackTrace();
