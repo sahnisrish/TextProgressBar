@@ -47,7 +47,7 @@ public class MyTask {
                     while (!isCancelled()){
                         int cFrom = position;
                         int cTo = (position+1)% colorText.length;
-//                        Log.e("COLORS", cFrom + " " + cTo);
+                        Log.e("COLORS", cFrom + " " + cTo + " " + isCancelled());
                         for(int i=0;i<20;i++){
                             sleep(25);
                             modify(colorText[cFrom],colorText[cTo],0.01f*i*speed);
