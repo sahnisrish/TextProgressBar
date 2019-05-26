@@ -32,7 +32,7 @@ public class MyTask {
     }
 
     public static MyTask close(MyTask myTask) {
-        myTask.thread.stop();
+        myTask.thread.interrupt();
         return null;
     }
 
