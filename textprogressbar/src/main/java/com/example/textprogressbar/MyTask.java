@@ -14,11 +14,13 @@ public class MyTask {
     private Boolean cancel = false;
     private Thread thread;
     private String theme;
+    private int speed;
     private int[] colorText;
     private MyTask(Context context, TextProgressBar textProgressBar){
         this.context = context;
         this.textProgressBar = textProgressBar;
         this.theme = textProgressBar.getTheme();
+        this.speed = 6 - textProgressBar.getSpeed();
         if(theme.equalsIgnoreCase("light")){
             colorText = context.getResources().getIntArray(R.array.light);
         }
@@ -46,15 +48,10 @@ public class MyTask {
                         int cFrom = position;
                         int cTo = (position+1)% colorText.length;
 //                        Log.e("COLORS", cFrom + " " + cTo);
-                        sleep(125);
-                        modify(colorText[cFrom],colorText[cTo],0.25f);
-                        sleep(125);
-                        modify(colorText[cFrom],colorText[cTo],0.50f);
-                        sleep(125);
-                        modify(colorText[cFrom],colorText[cTo],0.75f);
-                        sleep(125);
-                        modify(colorText[cFrom],colorText[cTo],1.0f);
-                        sleep(125);
+                        for(int i=0;i<20;i++){
+                            sleep(25);
+                            modify(colorText[cFrom],colorText[cTo],0.01f*i*speed);
+                        }
                         position = cTo;
                     }
                     modify(colorText[position],colorText[0],0.5f);

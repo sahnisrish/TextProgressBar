@@ -3,5 +3,6 @@
     <declare-styleable name="TextProgressBar">
         <attr name="ptheme" format="string" />
         <attr name="progress" format="boolean"/>
+        <attr name="speed" format="integer"/>
     </declare-styleable>
 </resources>

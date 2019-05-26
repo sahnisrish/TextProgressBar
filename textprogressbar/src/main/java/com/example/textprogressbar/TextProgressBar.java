@@ -13,6 +13,7 @@ public class TextProgressBar extends AppCompatTextView {
 
     private String theme;
     private Boolean progress;
+    private int speed;
     private Context context;
     private MyTask myTask;
     public TextProgressBar(Context context) {
@@ -40,6 +41,11 @@ public class TextProgressBar extends AppCompatTextView {
             TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.TextProgressBar);
             theme = a.getString(R.styleable.TextProgressBar_ptheme);
             progress = a.getBoolean(R.styleable.TextProgressBar_progress, false);
+            speed = a.getInt(R.styleable.TextProgressBar_speed,1);
+            if(speed>5)
+                speed =5;
+            if(speed<1)
+                speed = 1;
             try {
                 if (theme == null || !(theme.equalsIgnoreCase("light")||theme.equalsIgnoreCase("dark"))) {
                     theme = "light";
@@ -86,4 +92,13 @@ public class TextProgressBar extends AppCompatTextView {
     public String getTheme() {
         return theme;
     }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
 }
