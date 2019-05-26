@@ -17,16 +17,16 @@ public class MyTask extends AsyncTask<String, Void, Void> {
         String theme = strings[0];
         int colorText[] = new int[8];
         int position = 0;
-        if(theme.equals("light")){
+        if(theme.equalsIgnoreCase("light")){
             colorText = context.getResources().getIntArray(R.array.light);
         }
-        else if(theme.equals("dark")){
+        else if(theme.equalsIgnoreCase("dark")){
             colorText = context.getResources().getIntArray(R.array.dark);
         }
         while (true){
             int cFrom = position;
             int cTo = (position+1)%colorText.length;
-            ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), cFrom, cTo);
+            ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorText[cFrom], colorText[cTo]);
             colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animator) {
@@ -40,7 +40,13 @@ public class MyTask extends AsyncTask<String, Void, Void> {
             }
             colorAnimation.start();
             if(isCancelled()){
-                textProgressBar.setTextColor(colorText[0]);
+                ValueAnimator colorReset = ValueAnimator.ofObject(new ArgbEvaluator(), colorText[cTo], colorText[0]);
+                colorReset.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animator) {
+                        textProgressBar.setTextColor((Integer)animator.getAnimatedValue());
+                    }
+                });
                 break;
             }
             position = cTo;
