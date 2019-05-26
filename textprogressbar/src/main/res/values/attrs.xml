@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="TextProgressBar">
-        <attr name="theme" format="string" />
+        <attr name="text_theme" format="string" />
         <attr name="progress" format="boolean"/>
     </declare-styleable>
 </resources>
