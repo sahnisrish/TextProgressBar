@@ -47,7 +47,10 @@ public class TextProgressBar extends AppCompatTextView {
             if(speed<1)
                 speed = 1;
             try {
-                if (theme == null || !(theme.equalsIgnoreCase("light")||theme.equalsIgnoreCase("dark"))) {
+                if (theme == null) {
+                    theme = "light";
+                }
+                else if(!(theme.equalsIgnoreCase("light")||theme.equalsIgnoreCase("dark"))){
                     theme = "light";
                 }
             } catch (Exception e) {
