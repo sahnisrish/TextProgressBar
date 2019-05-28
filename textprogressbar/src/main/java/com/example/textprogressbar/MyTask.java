@@ -12,12 +12,19 @@ public class MyTask {
     private TextProgressBar textProgressBar;
     private Boolean cancel = false;
     private Thread thread;
+    private String theme;
     private int speed;
     private int[] colorText;
+    private Context context;
     private MyTask(Context context, TextProgressBar textProgressBar){
         this.textProgressBar = textProgressBar;
         this.speed = 6 - textProgressBar.getSpeed();
-        String theme = textProgressBar.getTheme();
+        this.theme = textProgressBar.getTheme();
+        this.context = context;
+        setColors(theme);
+    }
+
+    private void setColors(String theme) {
         if(theme.equalsIgnoreCase("light")){
             colorText = context.getResources().getIntArray(R.array.light);
         }
@@ -42,13 +49,15 @@ public class MyTask {
                             int cTo = (position + 1) % colorText.length;
                             Log.e("COLORS", cFrom + " " + cTo + " " + isCancelled());
                             for (int i = 0; i < 20; i++) {
-                                sleep(20 * speed);
+                                sleep(5 * speed);
                                 modify(colorText[cFrom], colorText[cTo], 0.01f * i);
                             }
                             position = cTo;
                         }
                         if(isCancelled() && position!=0){
+                            sleep(5*speed);
                             modify(colorText[position],colorText[0],0.5f);
+                            sleep(5*speed);
                             modify(colorText[position],colorText[0],1.0f);
                             position = 0;
                         }
@@ -86,5 +95,17 @@ public class MyTask {
     protected void finalize() throws Throwable {
         thread.interrupt();
         super.finalize();
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
+        setColors(theme);
+        if(isCancelled()){
+            textProgressBar.setTextColor(colorText[0]);
+        }
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = 6 - speed;
     }
 }
