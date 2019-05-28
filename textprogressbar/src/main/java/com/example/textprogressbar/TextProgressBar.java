@@ -71,10 +71,10 @@ public class TextProgressBar extends AppCompatTextView {
             this.setTextColor(R.color.dark_base);
         }
         if(progress){
-            myTask.cancel(true);
+            myTask.cancel(false);
         }
         else {
-            myTask.cancel(false);
+            myTask.cancel(true);
         }
         myTask.execute();
     }
