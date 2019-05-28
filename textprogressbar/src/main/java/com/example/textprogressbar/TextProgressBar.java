@@ -62,13 +62,12 @@ public class TextProgressBar extends AppCompatTextView {
         set();
     }
 
-    @SuppressLint("ResourceAsColor")
     private void set() {
         if(theme.equalsIgnoreCase("light")){
-            this.setTextColor(R.color.light_base);
+            this.setTextColor(getResources().getColor(R.color.light_base));
         }
         else {
-            this.setTextColor(R.color.dark_base);
+            this.setTextColor(getResources().getColor(R.color.dark_base));
         }
         myTask.execute();
         setProgress(progress);
