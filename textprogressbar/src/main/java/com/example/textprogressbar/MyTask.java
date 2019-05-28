@@ -48,15 +48,15 @@ public class MyTask {
                             int cFrom = position;
                             int cTo = (position + 1) % colorText.length;
                             for (int i = 0; i < 200; i++) {
-                                sleep(3 * speed);
+                                sleep(speed);
                                 modify(colorText[cFrom], colorText[cTo], 0.005f * i);
                             }
                             position = cTo;
                         }
                         if(isCancelled() && position!=0){
-                            sleep(10*speed);
+                            sleep(speed);
                             modify(colorText[position],colorText[0],0.5f);
-                            sleep(10*speed);
+                            sleep(speed);
                             modify(colorText[position],colorText[0],1.0f);
                             position = 0;
                         }
