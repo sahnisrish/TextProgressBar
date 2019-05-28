@@ -70,9 +70,13 @@ public class TextProgressBar extends AppCompatTextView {
         else {
             this.setTextColor(R.color.dark_base);
         }
-        if(progress) {
-            myTask.execute();
+        if(progress){
+            myTask.cancel(true);
         }
+        else {
+            myTask.cancel(false);
+        }
+        myTask.execute();
     }
 
     public void setTheme(String theme){
