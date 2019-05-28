@@ -12,13 +12,12 @@ public class MyTask {
     private TextProgressBar textProgressBar;
     private Boolean cancel = false;
     private Thread thread;
-    private String theme;
     private int speed;
     private int[] colorText;
     private MyTask(Context context, TextProgressBar textProgressBar){
         this.textProgressBar = textProgressBar;
-        this.theme = textProgressBar.getTheme();
         this.speed = 6 - textProgressBar.getSpeed();
+        String theme = textProgressBar.getTheme();
         if(theme.equalsIgnoreCase("light")){
             colorText = context.getResources().getIntArray(R.array.light);
         }
@@ -31,29 +30,29 @@ public class MyTask {
         return new MyTask(context, textProgressBar);
     }
 
-    public static MyTask close(MyTask myTask) {
-        myTask.thread.interrupt();
-        return null;
-    }
-
     public void execute() {
         thread = new Thread(){
             @Override
             public void run() {
                 try {
                     int position = 0;
-                    while (!isCancelled()){
-                        int cFrom = position;
-                        int cTo = (position+1)% colorText.length;
-                        Log.e("COLORS", cFrom + " " + cTo + " " + isCancelled());
-                        for(int i=0;i<20;i++){
-                            sleep(25);
-                            modify(colorText[cFrom],colorText[cTo],0.01f*i*speed);
+                    while (true){
+                        if(!isCancelled()) {
+                            int cFrom = position;
+                            int cTo = (position + 1) % colorText.length;
+                            Log.e("COLORS", cFrom + " " + cTo + " " + isCancelled());
+                            for (int i = 0; i < 20; i++) {
+                                sleep(20 * speed);
+                                modify(colorText[cFrom], colorText[cTo], 0.01f * i);
+                            }
+                            position = cTo;
                         }
-                        position = cTo;
+                        if(isCancelled() && position!=0){
+                            modify(colorText[position],colorText[0],0.5f);
+                            modify(colorText[position],colorText[0],1.0f);
+                            position = 0;
+                        }
                     }
-                    modify(colorText[position],colorText[0],0.5f);
-                    modify(colorText[position],colorText[0],1.0f);
                 }
                 catch (Exception e) {
                     e.printStackTrace();
@@ -81,5 +80,11 @@ public class MyTask {
 
     public void cancel(Boolean cancel){
         this.cancel = cancel;
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        thread.interrupt();
+        super.finalize();
     }
 }

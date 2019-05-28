@@ -1,13 +1,10 @@
 package com.example.textprogressbar;
 
-import android.animation.ArgbEvaluator;
-import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
-import android.util.Log;
 
 public class TextProgressBar extends AppCompatTextView {
 
@@ -61,6 +58,7 @@ public class TextProgressBar extends AppCompatTextView {
         else {
             theme = "light";
             progress = false;
+            speed = 5;
         }
         if(progress){
             myTask.execute();
