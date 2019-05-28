@@ -28,17 +28,13 @@ public class MainActivity extends AppCompatActivity {
         toggleLight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Log.e("Light","b " + light.inProgress());
                 light.setProgress(!light.inProgress());
-//                Log.e("Light","a " + light.inProgress());
             }
         });
         toggleDark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Log.e("Dark","b " + light.inProgress());
                 dark.setProgress(!dark.inProgress());
-//                Log.e("Dark","a " + light.inProgress());
             }
         });
     }
