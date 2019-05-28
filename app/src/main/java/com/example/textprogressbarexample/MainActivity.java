@@ -44,5 +44,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(MainActivity.this, "HANDLER",Toast.LENGTH_LONG).show();
+                Log.e("Light","b " + light.inProgress());
+                light.setProgress(!light.inProgress());
+                Log.e("Light","a " + light.inProgress());
+                Log.e("Dark","b " + light.inProgress());
+                dark.setProgress(!dark.inProgress());
+                Log.e("Dark","a " + light.inProgress());
+            }
+        }, 100000);
     }
 }
