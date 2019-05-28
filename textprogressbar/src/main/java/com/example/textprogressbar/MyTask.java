@@ -47,16 +47,16 @@ public class MyTask {
                         if(!isCancelled()) {
                             int cFrom = position;
                             int cTo = (position + 1) % colorText.length;
-                            for (int i = 0; i < 20; i++) {
-                                sleep(20 * speed);
-                                modify(colorText[cFrom], colorText[cTo], 0.01f * i);
+                            for (int i = 0; i < 200; i++) {
+                                sleep(3 * speed);
+                                modify(colorText[cFrom], colorText[cTo], 0.005f * i);
                             }
                             position = cTo;
                         }
                         if(isCancelled() && position!=0){
-                            sleep(20*speed);
+                            sleep(10*speed);
                             modify(colorText[position],colorText[0],0.5f);
-                            sleep(20*speed);
+                            sleep(10*speed);
                             modify(colorText[position],colorText[0],1.0f);
                             position = 0;
                         }
